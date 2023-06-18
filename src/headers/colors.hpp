@@ -4,6 +4,6 @@
 
 namespace colors
 {
-	Color background("#1e1e2e");
+	Color background("#181825");
 	Color  crosshair("#4e52567f");
 }

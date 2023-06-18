@@ -13,6 +13,12 @@ const float PI = std::numbers::pi;
 
 namespace utils
 {
+	void toggle(bool &boolean);
+
+	void createFolder(std::string path);
+
+	std::string replaceStringSubstring(std::string string, std::string substring, std::string replacement = "");
+
 	float degToRad(float deg);
 
 	float radToDeg(float rad);

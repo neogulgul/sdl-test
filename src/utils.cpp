@@ -1,6 +1,33 @@
+#include <filesystem>
+
 #include "headers/utils.hpp"
 
 using namespace std;
+
+namespace fs = std::filesystem;
+
+void utils::toggle(bool &boolean)
+{
+	boolean = !boolean;
+}
+
+void utils::createFolder(std::string path)
+{
+	if (fs::is_regular_file(path))
+	{
+		fs::remove(path);
+	}
+	if (!fs::is_directory(path))
+	{
+		fs::create_directory(path);
+	}
+}
+
+std::string utils::replaceStringSubstring(std::string string, std::string substring, std::string replacement)
+{
+	string.replace(string.find(substring), substring.size(), replacement);
+	return string;
+}
 
 float utils::degToRad(float deg)
 {
@@ -121,7 +148,7 @@ Vector2f utils::rotate_2d_position(Vector2f position, Vector2f origo, float deg)
 			{cos(rad), -sin(rad)},
 			{sin(rad),  cos(rad)}
 		},
-		Vector2f_to_Matrix(position + -origo)
+		Vector2f_to_Matrix(position - origo)
 	);
 
 	return {

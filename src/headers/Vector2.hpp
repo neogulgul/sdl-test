@@ -82,6 +82,14 @@ Vector2<T> operator *= (Vector2<T> &left, const T right)
 }
 
 template <typename T>
+Vector2<T> operator *= (Vector2<T> &left, const Vector2<T> right)
+{
+	left.x *= right.x;
+	left.y *= right.y;
+	return left;
+}
+
+template <typename T>
 Vector2<T> operator / (const Vector2<T> left, const T right)
 {
 	return Vector2<T>(left.x / right, left.y / right);

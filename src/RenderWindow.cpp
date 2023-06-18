@@ -1,7 +1,10 @@
+#include <chrono>
+#include <sstream>
+
 #include "headers/RenderWindow.hpp"
 #include "headers/utils.hpp"
 
-RenderWindow::RenderWindow(const char* title, Vector2f windowSize, View* view)
+RenderWindow::RenderWindow(const char* title, Vector2u windowSize, View* view)
 {
 	window = SDL_CreateWindow(
 		title,
@@ -24,6 +27,27 @@ void RenderWindow::close()
 {
 	is_open = false;
 }
+
+void RenderWindow::screenshot()
+{
+	utils::createFolder("screenshots");
+
+	std::chrono::time_point currentTime = std::chrono::system_clock::now();
+
+	// removing "ns" from end of currentTime
+	std::stringstream ss;
+	ss << currentTime.time_since_epoch();
+	ss.str(utils::replaceStringSubstring(ss.str(), "ns"));
+
+	std::string filepath = "screenshots/" + ss.str() + ".png";
+
+	SDL_Surface* surface = SDL_GetWindowSurface(window);
+	SDL_RenderReadPixels(renderer, NULL, 0, surface->pixels, surface->pitch);
+
+	IMG_SavePNG(surface, filepath.c_str());
+
+	std::cout << "Screenshot saved at: " << filepath << "\n";
+};
 
 void RenderWindow::setRenderColor(Color color)
 {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <vector>
 
 #include "Color.hpp"
@@ -17,9 +18,11 @@ struct RenderWindow
 
 	View* view;
 
-	RenderWindow(const char* title, Vector2f windowSize, View* view);
+	RenderWindow(const char* title, Vector2u windowSize, View* view);
 
 	void close();
+
+	void screenshot();
 
 	void setRenderColor(Color color);
 
